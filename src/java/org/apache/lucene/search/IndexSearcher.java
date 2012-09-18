@@ -282,8 +282,12 @@ public TopFieldDocs search(Weight weight, Filter filter, int nDocs,
     	collector.setScorer(scorer);
     	int scorerDoc;
 		while((scorerDoc = scorer.nextDoc()) != DocIdSetIterator.NO_MORE_DOCS){
-			if(eff.filter(scorer.getSorts())){
-				collector.collect(scorerDoc, scorer.getSorts());
+			try {
+				if(eff.filter(scorer.getSorts())){
+					collector.collect(scorerDoc, scorer.getSorts());
+				}
+			} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+				e.getMessage();
 			}
 		}
     } else {

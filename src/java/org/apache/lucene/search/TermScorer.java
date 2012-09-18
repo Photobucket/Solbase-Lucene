@@ -18,9 +18,6 @@ package org.apache.lucene.search;
  */
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import org.apache.lucene.index.TermDocs;
 
@@ -77,7 +74,7 @@ final class TermScorer extends Scorer {
     //this.norms = norms;
     this.weightValue = weight.getValue();
 
-    this.boostingFactor = (int) ((System.currentTimeMillis()/60000) - boostingFactor);
+    this.boostingFactor = (int) ((System.currentTimeMillis()/60000) - Scorer.boostingFactor);
     this.boostingFactor -= SolbaseEpochTime; 
     
     for (int i = 0; i < SCORE_CACHE_SIZE; i++)
